@@ -1,0 +1,27 @@
+# --- Core AI & Vision ---
+ultralytics>=8.0.0
+opencv-python
+numpy<2.0.0
+torch
+torchvision
+
+# --- Tracking (SORT Algorithm) ---
+filterpy
+scipy
+lapx
+matplotlib
+scikit-image
+
+# --- GUI & Assets ---
+customtkinter
+pillow
+pygame
+
+# --- Data & IoT ---
+pandas
+openpyxl
+paho-mqtt
+mysql-connector-python
+
+# --- Build Tool ---
+pyinstaller

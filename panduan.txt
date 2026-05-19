@@ -1,0 +1,95 @@
+==========================================================================
+             PANDUAN OPERASIONAL: SMART STITCH DETECTION
+                   PT PETROKIMIA GRESIK - 2026
+==========================================================================
+
+Sistem ini adalah aplikasi berbasis Artificial Intelligence (YOLOv8) 
+untuk memantau kualitas jahitan karung secara real-time maupun offline.
+
+Install library (pip install -r requirements.txt)
+
+--------------------------------------------------------------------------
+1. ALUR KERJA SISTEM (WORKFLOW)
+--------------------------------------------------------------------------
+A. LOGIN: Keamanan akses operator (login_new.pyw).
+B. NAVIGASI: Memilih sumber data (main_menu_new.py).
+C. KONFIGURASI: Mengatur jumlah dan alamat IP/RTSP kamera (camera_config_new.py).
+D. ENGINE: Proses deteksi AI dan monitoring dashboard (main_coding_new.py).
+E. ANALYTICS: Audit data produksi dan auto-export laporan (GUI_LAYOUT.py).
+
+--------------------------------------------------------------------------
+2. PENJELASAN FILE & FUNGSINYA
+--------------------------------------------------------------------------
+
+[1] login_new.py
+    - Fungsi: Pintu masuk utama sistem (Secure Gateway).
+    - Fitur: Autentikasi menggunakan password (default: admin).
+
+[2] main_menu_new.py
+    - Fungsi: Pusat kendali navigasi (Navigation Hub).
+    - Fitur: Memilih Mode 'Live CCTV' atau 'Video Offline'.
+
+[3] camera_config_new.py
+    - Fungsi: Panel pengaturan koneksi kamera (Device Setup).
+    - Fitur: Mengatur 1-6 Line dan simpan konfigurasi ke camera_config.json.
+
+[4] main_coding_new.py
+    - Fungsi: Mesin Utama (Core Engine).
+    - Fitur: Menjalankan model YOLOv8 (best.pt) dengan sistem Multi-threading.
+
+[5] GUI_LAYOUT.py
+    - Fungsi: Antarmuka Dashboard & Analytics (Visual Interface).
+    - Fitur: Dashboard CCTV, Grafik Produktivitas, dan Fungsi Auto-Export.
+
+[6] selectfile_terbarufinal.py
+    - Fungsi: Pemroses video offline untuk analisis rekaman lama.
+
+--------------------------------------------------------------------------
+3. LOGIKA DASHBOARD ANALYTICS & AUTO-EXPORT
+--------------------------------------------------------------------------
+
+Dashboard Analysis kini bekerja secara otomatis untuk mendukung pelaporan
+tanpa perlu ekspor manual oleh operator.
+
+A. JADWAL SHIFT OPERASIONAL 
+   Sistem membagi data berdasarkan siklus shift resmi PT Petrokimia Gresik:
+   * Shift 1 (Pagi)  : 07:00 - 15:00
+   * Shift 2 (Sore)  : 15:00 - 23:00
+   * Shift 3 (Malam)  : 23:00 - 07:00
+
+B. MEKANISME AUTO-EXPORT PER SHIFT
+   Sistem akan secara otomatis menghasilkan laporan (.xlsx) pada folder
+   /export_excel/ tepat saat pergantian shift:
+   * Pukul 15:00: Mengekspor Laporan Shift 1 (Pagi).
+   * Pukul 23:00: Mengekspor Laporan Shift 2 (Sore).
+   * Pukul 07:00: Mengekspor Laporan Shift 3 (Malam).
+
+C. GRAFIK GARIS (Hourly Delta Logic)
+   - Fungsi: Menampilkan tren produksi bersih per jam.
+   - Logika: (Data Count Jam N) - (Data Count Jam N-1).
+   - Reset: Grafik akan kosong/reset setiap kali masuk ke shift baru.
+
+D. DIAGRAM BATANG (Quality Summary)
+   - Menampilkan total "Good" (jahitan oke) vs "Bad" (jahitan defect).
+   - Menghitung persentase akurasi kualitas produksi secara real-time.
+
+E. SISTEM FILTER KAMERA AKTIF
+   - Data yang dihitung hanya berasal dari kamera yang berstatus "ON".
+   - Jika Line C dinonaktifkan, data Line C tidak akan diakumulasikan ke 
+     dalam total Accuracy Rate shift tersebut.
+
+--------------------------------------------------------------------------
+4. STRUKTUR DATA & PENYIMPANAN
+--------------------------------------------------------------------------
+- folder/export_excel/: 
+  Tempat penyimpanan laporan otomatis (Report_ShiftX_Tgl.xlsx) dan database 
+  mentah (Detection_Logs.csv).
+- camera_config.json: 
+  Menyimpan IP/RTSP kamera terakhir agar tidak perlu input ulang.
+- session_mode.json: 
+  Menyimpan status terakhir aplikasi (Mode Live atau Offline).
+
+==========================================================================
+                 Smart Stitch Detection v1.1 - 2026
+           Departemen Pergudangan & Pengantongan - Petrokimia
+==========================================================================

@@ -1,0 +1,23 @@
+{
+    "database": {
+        "stitch_petrokimia1": "rtsp://admin:Petro@2025@10.14.66.35:554/Streaming/Channels/201",
+        "stitch_petrokimia2": "rtsp://admin:Petro@2025@10.14.66.36:554/Streaming/Channels/201",
+        "stitch_petrokimia3": "rtsp://admin:Petro@2025@10.14.66.37:554/Streaming/Channels/201",
+        "stitch_petrokimia4": "rtsp://admin:Petro@2025@10.14.66.38:554/Streaming/Channels/201"
+    },
+    "active_config": {
+        "addresses": [
+            "rtsp://admin:Petro@2025@10.14.66.35:554/Streaming/Channels/201",
+            "rtsp://admin:Petro@2025@10.14.66.36:554/Streaming/Channels/201",
+            "rtsp://admin:Petro@2025@10.14.66.37:554/Streaming/Channels/201",
+            "rtsp://admin:Petro@2025@10.14.66.38:554/Streaming/Channels/201"
+        ],
+        "names": [
+            "Line A",
+            "Line B",
+            "Line C",
+            "Line D"
+        ]
+    },
+    "file": ""
+}
